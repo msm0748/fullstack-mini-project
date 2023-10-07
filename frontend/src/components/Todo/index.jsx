@@ -78,7 +78,7 @@ export default function Todo() {
     <div className="max-w-sm w-full shadow-lg bg-white p-8 rounded-xl opacity-70">
       <ToastContainer
         position="bottom-right"
-        autoClose={2000}
+        autoClose={1200}
         hideProgressBar={false}
         newestOnTop={false}
         closeOnClick

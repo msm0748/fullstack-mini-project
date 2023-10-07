@@ -35,7 +35,8 @@ exports.patchTodo = async (req, res) => {
         where: { id },
       }
     );
-    res.send({ result, message: '수정이 완료되었습니다.' });
+    if (title) return res.send({ result, message: '수정이 완료되었습니다.' });
+    if (done) return res.send({ result, message: '할 일을 완료했습니다.' });
   } catch (err) {
     console.log(err);
     res.send(err);

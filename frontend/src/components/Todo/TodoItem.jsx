@@ -44,6 +44,28 @@ export default function TodoItem({
     }
   };
 
+  const handleCheckbox = async (e, id) => {
+    // console.log(e.target.checked);
+    const done = e.target.checked;
+    const newTodoList = todoList.map((todo) => {
+      if (todo.id === id) {
+        return { ...todo, done };
+      }
+      return todo;
+    });
+    try {
+      const newTodo = { done };
+      const response = await axiosInstance.patch(`/todo/${id}`, newTodo);
+      const data = await response.data;
+      console.log(data);
+      setTodoList(newTodoList);
+      toast.success(data.message);
+      setIsEditing(false);
+    } catch (err) {
+      toast.error(err);
+    }
+  };
+
   return (
     <li
       className="w-full border-2 rounded-xl mt-2 hover:border-blue-300"
@@ -55,6 +77,8 @@ export default function TodoItem({
           id={index}
           type="checkbox"
           className="float-left block w-6 h-6 m-3"
+          checked={todo.done}
+          onChange={(e) => handleCheckbox(e, todo.id)}
         />
       )}
       <div className="float-right flex items-center h-full">
