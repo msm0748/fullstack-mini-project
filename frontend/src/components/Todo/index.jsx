@@ -119,7 +119,11 @@ export default function Todo() {
       </div>
 
       {isLoading && <div className="mt-3">loading...</div>}
-      <TodoList todoList={todoList} handleDelete={handleDelete} />
+      <TodoList
+        todoList={todoList}
+        handleDelete={handleDelete}
+        setTodoList={setTodoList}
+      />
     </div>
   );
 }

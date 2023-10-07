@@ -25,6 +25,23 @@ exports.postTodo = async (req, res) => {
   }
 };
 
+exports.patchTodo = async (req, res) => {
+  const { id } = req.params;
+  const { title, done } = req.body;
+  try {
+    const result = await Todo.update(
+      { title, done },
+      {
+        where: { id },
+      }
+    );
+    res.send({ result, message: '수정이 완료되었습니다.' });
+  } catch (err) {
+    console.log(err);
+    res.send(err);
+  }
+};
+
 exports.deleteTodo = async (req, res) => {
   const { id } = req.params;
   try {
