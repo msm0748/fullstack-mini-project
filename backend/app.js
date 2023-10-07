@@ -10,10 +10,10 @@ app.use(express.json());
 app.use(cors());
 
 // 배포시 경로
-// app.use(express.static(path.join(__dirname, '../frontend/react-project/build')));
-// app.get('/', function (req, res) {
-//   res.sendFile(path.join(__dirname, '../frontend/build/index.html'));
-// });
+app.use(express.static(path.join(__dirname, '../frontend/dist')));
+app.get('/', function (req, res) {
+  res.sendFile(path.join(__dirname, '../frontend/dist/index.html'));
+});
 
 const indexRouter = require('./routes/todo');
 app.use(indexRouter);
