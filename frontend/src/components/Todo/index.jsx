@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import TodoList from './TodoList';
+import axios from 'axios';
 
 const date = new Date();
 const options = { year: 'numeric', month: '2-digit', day: '2-digit', weekday: 'long' };
@@ -33,16 +34,24 @@ export default function Todo() {
     notify();
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     if (todo.trim() === '') {
       setTodo('');
       return inputTextRef.current.focus();
     }
     const id = +new Date();
-    const newTodo = { id, content: todo };
-    setTodoList((prev) => [...prev, newTodo]);
-    setTodo('');
-    inputTextRef.current.focus();
+    const newTodo = { title: todo, done: false };
+    try {
+      const response = await axios.post('http://localhost:8000/todos', {
+        newTodo,
+      });
+      console.log(response);
+      setTodoList((prev) => [...prev, newTodo]);
+      setTodo('');
+      inputTextRef.current.focus();
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   return (

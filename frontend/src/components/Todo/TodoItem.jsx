@@ -12,7 +12,7 @@ export default function TodoItem({ todo, index, handleDelete }) {
         x
       </button>
       <label htmlFor={index} className="block w-full p-3">
-        {todo.content}
+        {todo.title}
       </label>
     </li>
   );
