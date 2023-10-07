@@ -3,8 +3,8 @@ const controller = require('../controller/todoController');
 const router = express.Router();
 
 router.get('/todos', controller.getTodos);
-router.post('/todos', controller.postTodos);
+router.post('/todo', controller.postTodo);
 // router.patch('/todo/:todoId', controller.patchTodo);
-// router.delete('/todo/:todoId', controller.deleteTodo);
+router.delete('/todo/:id', controller.deleteTodo);
 
 module.exports = router;
